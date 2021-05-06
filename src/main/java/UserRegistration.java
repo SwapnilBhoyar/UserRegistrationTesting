@@ -2,7 +2,7 @@ import java.util.regex.*;
 import java.util.Scanner;
 public class UserRegistration {
     private boolean check;
-    private String firstName, lastName, email;
+    private String firstName, lastName, email, phoneNumber;
     Scanner sc = new Scanner(System.in);
 
     public void checkFirstName() {
@@ -44,11 +44,25 @@ public class UserRegistration {
         }
     }
 
+    public void checkPhoneNumber() {
+        System.out.println("enter a valid (Eg. 91 9919819801) : ");
+        phoneNumber = sc.nextLine();
+        check = Pattern.compile("^[0-9]{1,3} [0-9]{10}$").matcher(phoneNumber).matches();
+        if (!check) {
+            System.out.println(" phone number is invalid ");
+            checkPhoneNumber();
+        }
+        else {
+            System.out.println(" phone number is valid ");
+        }
+    }
+
     public static void main(String args[]) {
 
         UserRegistration user = new UserRegistration();
         user.checkFirstName();
         user.checkLastName();
         user.checkEmail();
+        user.checkPhoneNumber();
     }
 }
